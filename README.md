@@ -1,6 +1,6 @@
 # ICSE-2010-Testful
 This repository contains information related to the tool Testful presented in ICSE, 2010.
-The tool was originally presented in <a href="http://dl.acm.org/citation.cfm?id=1810353">this paper.</a>
+The tool was originally presented in <a href="http://dl.acm.org/citation.cfm?id=1810353&CFID=735785384&CFTOKEN=96328388">this paper.</a>
 
 This repository _is not_ the original repository for this tool.Here are some links to the original project:
 * <a href="https://code.google.com/p/testful/">The Official Project Page.</a>
