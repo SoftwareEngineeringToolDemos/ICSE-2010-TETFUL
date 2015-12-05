@@ -1,0 +1,67 @@
+
+  Vagrant.configure(2) do |config|
+  config.vm.box = "boxcutter/ubuntu1404-desktop"
+  config.vm.provider "virtualbox" do |vb|
+     # Display the VirtualBox GUI when booting the machine
+     vb.gui = true
+     vb.name = "TestFul"
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+   end
+ 
+   config.vm.provision "shell", inline: <<-SHELL
+  #  Installing java on the VM:
+     sudo apt-get update
+     sudo apt-get install -y openjdk-7-jre
+     sudo apt-get install -y openjdk-7-jdk
+    
+     sudo touch login_desktop.sh
+     sudo echo "#! /bin/bash" >> login_desktop.sh
+     sudo echo "/usr/bin/gsettings set org.gnome.desktop.screensaver lock-enabled false" >> login_desktop.sh
+     sudo chmod 777 login_desktop.sh
+
+     sudo touch login_desktop.sh.desktop
+     sudo echo "[Desktop Entry]" >> login_desktop.sh.desktop
+     sudo echo "Type=Application" >> login_desktop.sh.desktop
+     sudo echo "Exec=/home/vagrant/login_desktop.sh" >> login_desktop.sh.desktop
+     sudo echo "Hidden=false" >> login_desktop.sh.desktop
+     sudo echo "NoDisplay=false" >> login_desktop.sh.desktop
+     sudo echo "X-GNOME-Autostart-enabled=true" >> login_desktop.sh.desktop
+     sudo echo "Name=LockScreen Disabled" >> login_desktop.sh.desktop
+     sudo echo "Comment=Disable the lock screen" >> login_desktop.sh.desktop
+     sudo chmod 777 /home/vagrant/login_desktop.sh.desktop
+     sudo update-desktop-database
+     sudo cp login_desktop.sh.desktop /etc/xdg/autostart/login_desktop.sh.desktop
+     
+    # Downloading the Workspace and eclipse of the tool 
+     cd /home/vagrant/Desktop
+     sudo wget "https://googledrive.com/host/0B4H6x7rqcFw3Q2RrZ1QxdWE5Zk0/TestFul_Workspace.tar.gz"
+     
+     sudo chmod 777 TestFul_Workspace.tar.gz
+     tar -zxvf TestFul_Workspace.tar.gz
+     mv /home/vagrant/Desktop/workspace /home/vagrant/
+     
+     
+     
+
+     # Create an application launcher for Eclipse (to launch it on startup)
+     sudo chmod 777 /home/vagrant/Desktop/eclipse.desktop
+     sudo update-desktop-database
+     rm TestFul_eclipseproject.*
+
+     cd /home/vagrant/.config/
+     mkdir autostart
+     sudo cp /home/vagrant/Desktop/eclipse.desktop /home/vagrant/.config/autostart/
+     
+     # Remove unused icons from sidebar (making VM as minimal as possible)
+     sudo rm -f "/usr/share/applications/ubuntu-amazon-default.desktop"
+     sudo rm -f "/usr/share/applications/libreoffice-calc.desktop"
+     sudo rm -f "/usr/share/applications/libreoffice-writer.desktop"
+     sudo rm -f "/usr/share/applications/libreoffice-impress.desktop"
+     sudo rm -f "/usr/share/applications/ubuntu-software-center.desktop"
+     # Installing plugin for playing the demo video
+     sudo apt-get install flashplugin-installer
+     sudo reboot     
+   SHELL
+end
