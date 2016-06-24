@@ -11,7 +11,7 @@ This repository _is not_ the original repository for this tool.Here are some lin
 In this repository, for Testful you will find:
 * :white_check_mark: <a href="https://code.google.com/p/testful/source/checkout">Source code (available).</a>
 * :white_check_mark: <a href="https://code.google.com/p/testful/downloads/detail?name=testful-2.0.0.alpha.jar&can=2&q=">Executable tool (available).</a>
-* :white_check_mark: <a href="https://drive.google.com/a/ncsu.edu/file/d/0B4H6x7rqcFw3R2Itc1dPem5QVWs/view">Virtual machine containing tool (available).</a>
+* :white_check_mark: [Virtual machine containing tool](http://go.ncsu.edu/SE-tool-VMs)
 
 
 Thanks to Mr.Matteo Miraz for helping me in establishing this repository. 
